@@ -5,41 +5,57 @@
 # Replace example values with measured leakage wherever possible.
 # Set datasheet_url to the vendor datasheet or product page when known.
 
-- id: workbook-reference-40f
-  name: 40 F reference energy source
+- id: tplc-3r8-60f
+  name: Tecate TPLC-3R8/60MR10X25
   type: supercap
-  technology: EDLC
-  summary: Covers the workbook default target plus the default safety margin.
-  capacitance_f: 40
-  voltage_max_v: 4.2
-  voltage_min_v: 0
+  technology: LIC
+  summary: 60 F 3.8 V hybrid lithium-ion capacitor with very low leakage current and high energy density.
+  capacitance_f: 60
+  voltage_max_v: 3.8
+  voltage_min_v: 2.2
   leakage_current_ua: 5
-  esr_ohm: 0.10
-  datasheet_url: ""
-  notes: Excel-style reference storage element.
+  esr_ohm: 0.245
+  datasheet_url: "https://ds.tecategroup.com/data_sheet.php?i=TPLC-3R8/60MR10X25"
+  notes: >
+    Tecate TPLC hybrid lithium-ion capacitor (LIC). Typical DC ESR is 245 mΩ
+    (110 mΩ AC ESR @ 1 kHz). Recommended operating voltage range is
+    2.2–3.8 V.
 
-- id: starter-10f
-  name: 10 F starter energy source
-  type: supercap
-  technology: EDLC
-  summary: Smaller buffer for short duty cycles or reduced energy targets.
-  capacitance_f: 10
-  voltage_max_v: 5.5
-  voltage_min_v: 0
-  leakage_current_ua: 8
-  esr_ohm: 0.18
-  datasheet_url: ""
-  notes: Example value, replace with datasheet or measured leakage.
+# - id: workbook-reference-40f
+#   name: 40 F reference energy source
+#   type: supercap
+#   technology: EDLC
+#   summary: Covers the workbook default target plus the default safety margin.
+#   capacitance_f: 40
+#   voltage_max_v: 4.2
+#   voltage_min_v: 0
+#   leakage_current_ua: 5
+#   esr_ohm: 0.10
+#   datasheet_url: ""
+#   notes: Excel-style reference storage element.
 
-- id: reserve-50f
-  name: 50 F reserve energy source
-  type: supercap
-  technology: EDLC
-  summary: Larger buffer for slow charging or higher energy payloads.
-  capacitance_f: 50
-  voltage_max_v: 5.0
-  voltage_min_v: 0
-  leakage_current_ua: 12
-  esr_ohm: 0.08
-  datasheet_url: ""
-  notes: Example value, replace with datasheet or measured leakage.
+# - id: starter-10f
+#   name: 10 F starter energy source
+#   type: supercap
+#   technology: EDLC
+#   summary: Smaller buffer for short duty cycles or reduced energy targets.
+#   capacitance_f: 10
+#   voltage_max_v: 5.5
+#   voltage_min_v: 0
+#   leakage_current_ua: 8
+#   esr_ohm: 0.18
+#   datasheet_url: ""
+#   notes: Example value, replace with datasheet or measured leakage.
+
+# - id: reserve-50f
+#   name: 50 F reserve energy source
+#   type: supercap
+#   technology: EDLC
+#   summary: Larger buffer for slow charging or higher energy payloads.
+#   capacitance_f: 50
+#   voltage_max_v: 5.0
+#   voltage_min_v: 0
+#   leakage_current_ua: 12
+#   esr_ohm: 0.08
+#   datasheet_url: ""
+#   notes: Example value, replace with datasheet or measured leakage.
