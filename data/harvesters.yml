@@ -3,17 +3,17 @@
 # Replace example values with measured data or datasheet values for your hardware.
 # Set datasheet_url to the vendor datasheet or product page when known.
 
-- id: workbook-baseline
-  name: Workbook baseline harvester
-  summary: Matches the default values in mfc_charge_time_calculator.xlsx.
+- id: AEM00940
+  name: e-PEAS AEM00940
+  summary: High-efficiency photovoltaic constant voltage boost PMIC
   efficiency: 0.70
   quiescent_power_mw: 0.005
   input_min_v: 0.05
   input_max_v: 4.5
   input_current_max_ma: 110
   storage_voltage_max_v: 4.5
-  datasheet_url: ""
-  notes: Excel default reference.
+  datasheet_url: "https://e-peas.com/documents/AEM00940/DS-AEM0094x.pdf"
+  notes: 
 
 - id: low-startup-demo
   name: Low-startup demo harvester
