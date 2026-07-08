@@ -15,26 +15,3 @@
   datasheet_url: "https://e-peas.com/documents/AEM00940/DS-AEM0094x.pdf"
   notes: 
 
-- id: low-startup-demo
-  name: Low-startup demo harvester
-  summary: Example for weak MFC arrays with lower input voltage.
-  efficiency: 0.55
-  quiescent_power_mw: 0.002
-  input_min_v: 0.02
-  input_max_v: 3.3
-  input_current_max_ma: 25
-  storage_voltage_max_v: 3.8
-  datasheet_url: ""
-  notes: Replace with measured harvester data.
-
-- id: high-efficiency-lab
-  name: High-efficiency lab harvester
-  summary: Example for a tuned lab setup with better conversion efficiency.
-  efficiency: 0.82
-  quiescent_power_mw: 0.010
-  input_min_v: 0.30
-  input_max_v: 5.0
-  input_current_max_ma: 150
-  storage_voltage_max_v: 5.0
-  datasheet_url: ""
-  notes: Replace with measured harvester data.
