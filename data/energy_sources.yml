@@ -5,21 +5,239 @@
 # Replace example values with measured leakage wherever possible.
 # Set datasheet_url to the vendor datasheet or product page when known.
 
-- id: tplc-3r8-60f
-  name: Tecate TPLC-3R8/60MR10X25
+- id: tplce-3r8-3f
+  name: Tecate TPLCE-3R8/3.0MR5X12
   type: supercap
   technology: LIC
-  summary: 60 F 3.8 V hybrid lithium-ion capacitor with very low leakage current and high energy density.
-  capacitance_f: 60
+  summary: 3 F 3.8 V hybrid lithium-ion capacitor.
+  capacitance_f: 3
   voltage_max_v: 3.8
   voltage_min_v: 2.2
-  leakage_current_ua: 5
-  esr_ohm: 0.245
-  datasheet_url: "https://ds.tecategroup.com/data_sheet.php?i=TPLC-3R8/60MR10X25"
-  notes: >
-    Tecate TPLC hybrid lithium-ion capacitor (LIC). Typical DC ESR is 245 mΩ
-    (110 mΩ AC ESR @ 1 kHz). Recommended operating voltage range is
-    2.2–3.8 V.
+  leakage_current_ua:
+  esr_ohm:
+  datasheet_url: ""
+  notes: TPLCE enhanced energy density series.
+
+- id: tplce-3r8-8f
+  name: Tecate TPLCE-3R8/8.0MR6X12
+  type: supercap
+  technology: LIC
+  summary: 8 F 3.8 V hybrid lithium-ion capacitor.
+  capacitance_f: 8
+  voltage_max_v: 3.8
+  voltage_min_v: 2.2
+  leakage_current_ua:
+  esr_ohm:
+  datasheet_url: ""
+  notes: TPLCE enhanced energy density series.
+
+- id: tplce-3r8-22f
+  name: Tecate TPLCE-3R8/22MR6X22
+  type: supercap
+  technology: LIC
+  summary: 22 F 3.8 V hybrid lithium-ion capacitor.
+  capacitance_f: 22
+  voltage_max_v: 3.8
+  voltage_min_v: 2.2
+  leakage_current_ua:
+  esr_ohm:
+  datasheet_url: ""
+  notes: TPLCE enhanced energy density series.
+
+- id: tplce-3r8-25f
+  name: Tecate TPLCE-3R8/25MR8X14
+  type: supercap
+  technology: LIC
+  summary: 25 F 3.8 V hybrid lithium-ion capacitor.
+  capacitance_f: 25
+  voltage_max_v: 3.8
+  voltage_min_v: 2.2
+  leakage_current_ua:
+  esr_ohm:
+  datasheet_url: ""
+  notes: TPLCE enhanced energy density series.
+
+- id: tplce-3r8-40f
+  name: Tecate TPLCE-3R8/40MR8X20
+  type: supercap
+  technology: LIC
+  summary: 40 F 3.8 V hybrid lithium-ion capacitor.
+  capacitance_f: 40
+  voltage_max_v: 3.8
+  voltage_min_v: 2.2
+  leakage_current_ua:
+  esr_ohm:
+  datasheet_url: ""
+  notes: TPLCE enhanced energy density series.
+
+- id: tplce-3r8-55f-10x16
+  name: Tecate TPLCE-3R8/55MR10X16
+  type: supercap
+  technology: LIC
+  summary: 55 F 3.8 V hybrid lithium-ion capacitor.
+  capacitance_f: 55
+  voltage_max_v: 3.8
+  voltage_min_v: 2.2
+  leakage_current_ua:
+  esr_ohm:
+  datasheet_url: ""
+  notes: TPLCE enhanced energy density series.
+
+- id: tplce-3r8-55f-8x25
+  name: Tecate TPLCE-3R8/55MR8X25
+  type: supercap
+  technology: LIC
+  summary: 55 F 3.8 V hybrid lithium-ion capacitor.
+  capacitance_f: 55
+  voltage_max_v: 3.8
+  voltage_min_v: 2.2
+  leakage_current_ua:
+  esr_ohm:
+  datasheet_url: ""
+  notes: TPLCE enhanced energy density series.
+
+- id: tplce-3r8-85f
+  name: Tecate TPLCE-3R8/85MR10X20
+  type: supercap
+  technology: LIC
+  summary: 85 F 3.8 V hybrid lithium-ion capacitor.
+  capacitance_f: 85
+  voltage_max_v: 3.8
+  voltage_min_v: 2.2
+  leakage_current_ua:
+  esr_ohm:
+  datasheet_url: ""
+  notes: TPLCE enhanced energy density series.
+
+- id: tplce-3r8-110f
+  name: Tecate TPLCE-3R8/110MR10X25
+  type: supercap
+  technology: LIC
+  summary: 110 F 3.8 V hybrid lithium-ion capacitor.
+  capacitance_f: 110
+  voltage_max_v: 3.8
+  voltage_min_v: 2.2
+  leakage_current_ua:
+  esr_ohm:
+  datasheet_url: ""
+  notes: TPLCE enhanced energy density series.
+
+- id: tplce-3r8-150f
+  name: Tecate TPLCE-3R8/150MR10X30
+  type: supercap
+  technology: LIC
+  summary: 150 F 3.8 V hybrid lithium-ion capacitor.
+  capacitance_f: 150
+  voltage_max_v: 3.8
+  voltage_min_v: 2.2
+  leakage_current_ua:
+  esr_ohm:
+  datasheet_url: ""
+  notes: TPLCE enhanced energy density series.
+
+- id: tplce-3r8-200f
+  name: Tecate TPLCE-3R8/200MR12X25
+  type: supercap
+  technology: LIC
+  summary: 200 F 3.8 V hybrid lithium-ion capacitor.
+  capacitance_f: 200
+  voltage_max_v: 3.8
+  voltage_min_v: 2.2
+  leakage_current_ua:
+  esr_ohm:
+  datasheet_url: ""
+  notes: TPLCE enhanced energy density series.
+
+- id: tplce-3r8-300f
+  name: Tecate TPLCE-3R8/300MR12X35
+  type: supercap
+  technology: LIC
+  summary: 300 F 3.8 V hybrid lithium-ion capacitor.
+  capacitance_f: 300
+  voltage_max_v: 3.8
+  voltage_min_v: 2.2
+  leakage_current_ua:
+  esr_ohm:
+  datasheet_url: ""
+  notes: TPLCE enhanced energy density series.
+
+- id: tplce-3r8-350f
+  name: Tecate TPLCE-3R8/350MR12X40
+  type: supercap
+  technology: LIC
+  summary: 350 F 3.8 V hybrid lithium-ion capacitor.
+  capacitance_f: 350
+  voltage_max_v: 3.8
+  voltage_min_v: 2.2
+  leakage_current_ua:
+  esr_ohm:
+  datasheet_url: ""
+  notes: TPLCE enhanced energy density series.
+
+- id: tplce-3r8-400f
+  name: Tecate TPLCE-3R8/400MR12X45
+  type: supercap
+  technology: LIC
+  summary: 400 F 3.8 V hybrid lithium-ion capacitor.
+  capacitance_f: 400
+  voltage_max_v: 3.8
+  voltage_min_v: 2.2
+  leakage_current_ua:
+  esr_ohm:
+  datasheet_url: ""
+  notes: TPLCE enhanced energy density series.
+
+- id: tplce-3r8-450f
+  name: Tecate TPLCE-3R8/450MR16X30
+  type: supercap
+  technology: LIC
+  summary: 450 F 3.8 V hybrid lithium-ion capacitor.
+  capacitance_f: 450
+  voltage_max_v: 3.8
+  voltage_min_v: 2.2
+  leakage_current_ua:
+  esr_ohm:
+  datasheet_url: ""
+  notes: TPLCE enhanced energy density series.
+
+- id: tplce-3r8-850f
+  name: Tecate TPLCE-3R8/850MR18X40
+  type: supercap
+  technology: LIC
+  summary: 850 F 3.8 V hybrid lithium-ion capacitor.
+  capacitance_f: 850
+  voltage_max_v: 3.8
+  voltage_min_v: 2.2
+  leakage_current_ua:
+  esr_ohm:
+  datasheet_url: ""
+  notes: TPLCE enhanced energy density series.
+
+- id: tplce-3r8-1000f
+  name: Tecate TPLCE-3R8/1000MR18X50
+  type: supercap
+  technology: LIC
+  summary: 1000 F 3.8 V hybrid lithium-ion capacitor.
+  capacitance_f: 1000
+  voltage_max_v: 3.8
+  voltage_min_v: 2.2
+  leakage_current_ua:
+  esr_ohm:
+  datasheet_url: ""
+  notes: TPLCE enhanced energy density series.
+
+- id: tplce-3r8-1400f
+  name: Tecate TPLCE-3R8/1400MR18X60
+  type: supercap
+  technology: LIC
+  summary: 1400 F 3.8 V hybrid lithium-ion capacitor.
+  capacitance_f: 1400
+  voltage_max_v: 3.8
+  voltage_min_v: 2.2
+  leakage_current_ua:
+  esr_ohm:
+  datasheet_url: ""
+  notes: TPLCE enhanced energy density series.
 
 # - id: workbook-reference-40f
 #   name: 40 F reference energy source
