@@ -1,0 +1,27 @@
+# Optional DC-DC converters placed after the energy source.
+# Disable the converter in the UI to use direct storage voltage at the load.
+# Set datasheet_url to the vendor datasheet or product page when known.
+
+- id: regulated-3v3-efficient
+  name: Regulated 3.3 V efficient converter
+  summary: Example buck-boost stage for 3.3 V electronics.
+  output_voltage_v: 3.3
+  efficiency: 0.88
+  quiescent_power_mw: 0.006
+  input_min_v: 0.9
+  input_max_v: 5.5
+  output_current_max_ma: 100
+  datasheet_url: ""
+  notes: Replace with measured converter data.
+
+- id: regulated-5v-lowpower
+  name: Regulated 5 V low-power converter
+  summary: Example boost stage for 5 V payloads.
+  output_voltage_v: 5.0
+  efficiency: 0.78
+  quiescent_power_mw: 0.015
+  input_min_v: 1.8
+  input_max_v: 5.5
+  output_current_max_ma: 60
+  datasheet_url: ""
+  notes: Replace with measured converter data.

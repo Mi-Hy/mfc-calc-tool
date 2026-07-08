@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MudTronics MFC Energy Setup Tool</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="https://www.mi-hy.eu/mudtronics/" target="_blank" rel="noreferrer">
+          <span class="brand-mark">M</span>
+          <span class="brand-text">Mi-Hy MudTronics</span>
+        </a>
+        <div class="header-copy">
+          <p class="eyebrow">Microbial fuel cell setup planner</p>
+          <h1>MFC charge-time calculator</h1>
+          <p>
+            Select a harvester and energy source from YAML data, configure the MFC array, and check whether the setup can store the requested energy within the target time.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <section class="flow-band" aria-label="Energy flow">
+        <div class="flow-step">
+          <span class="flow-index">01</span>
+          <strong>MFC array</strong>
+          <span id="flow-array">30 cells</span>
+        </div>
+        <div class="flow-link"></div>
+        <div class="flow-step">
+          <span class="flow-index">02</span>
+          <strong>Harvester</strong>
+          <span id="flow-harvester">Loading</span>
+        </div>
+        <div class="flow-link"></div>
+        <div class="flow-step">
+          <span class="flow-index">03</span>
+          <strong>Energy source</strong>
+          <span id="flow-energy-source">Loading</span>
+        </div>
+        <div class="flow-link dc-link" id="flow-dc-link"></div>
+        <div class="flow-step" id="flow-dc-step">
+          <span class="flow-index">04</span>
+          <strong>DC-DC</strong>
+          <span id="flow-converter">Bypassed</span>
+        </div>
+        <div class="flow-link"></div>
+        <div class="flow-step">
+          <span class="flow-index">05</span>
+          <strong>Load</strong>
+          <span id="flow-load">150 J</span>
+        </div>
+      </section>
+
+      <div class="workspace">
+        <section class="config-column" aria-label="Setup inputs">
+          <div class="tool-panel">
+            <div class="panel-heading">
+              <p class="eyebrow">Target</p>
+              <h2>Energy and timing</h2>
+            </div>
+            <div class="field-grid">
+              <label class="field">
+                <span>Target energy at load</span>
+                <input data-input="targetEnergyJ" type="number" min="0" step="1" value="150">
+                <small>J</small>
+              </label>
+              <label class="field">
+                <span>Initial stored energy</span>
+                <input data-input="initialEnergyJ" type="number" min="0" step="1" value="0">
+                <small>J, storage side</small>
+              </label>
+              <label class="field">
+                <span>Usable storage fraction</span>
+                <input data-input="usableStoragePercent" type="number" min="1" max="100" step="1" value="100">
+                <small>%</small>
+              </label>
+              <label class="field">
+                <span>Safety margin</span>
+                <input data-input="safetyMarginPercent" type="number" min="0" max="500" step="1" value="10">
+                <small>%</small>
+              </label>
+              <label class="field">
+                <span>Desired charge time</span>
+                <input data-input="desiredChargeTimeH" type="number" min="0" step="1" value="48">
+                <small>h</small>
+              </label>
+              <label class="field">
+                <span>Other load while charging</span>
+                <input data-input="otherLoadMw" type="number" min="0" step="0.001" value="0">
+                <small>mW at load side</small>
+              </label>
+            </div>
+          </div>
+
+          <div class="tool-panel">
+            <div class="panel-heading">
+              <p class="eyebrow">MFC array</p>
+              <h2>Cell configuration</h2>
+            </div>
+            <div class="field-grid">
+              <label class="field">
+                <span>Power per MFC at MPP</span>
+                <input data-input="mfcPowerMw" type="number" min="0" step="0.001" value="0.05">
+                <small>mW</small>
+              </label>
+              <label class="field">
+                <span>Voltage per MFC at MPP</span>
+                <input data-input="mfcVoltageV" type="number" min="0" step="0.01" value="0.5">
+                <small>V</small>
+              </label>
+              <label class="field">
+                <span>Declared total MFCs</span>
+                <input data-input="declaredMfcCount" type="number" min="0" step="1" value="30">
+                <small>pcs</small>
+              </label>
+              <label class="field">
+                <span>MFCs in series</span>
+                <input data-input="seriesCount" type="number" min="1" step="1" value="6">
+                <small>per string</small>
+              </label>
+              <label class="field">
+                <span>Parallel strings</span>
+                <input data-input="parallelCount" type="number" min="1" step="1" value="5">
+                <small>strings</small>
+              </label>
+              <label class="field">
+                <span>Availability factor</span>
+                <input data-input="availabilityPercent" type="number" min="0" max="100" step="1" value="100">
+                <small>%</small>
+              </label>
+              <label class="field">
+                <span>Environmental derating</span>
+                <input data-input="deratingPercent" type="number" min="0" max="100" step="1" value="100">
+                <small>%</small>
+              </label>
+            </div>
+          </div>
+
+          <div class="tool-panel">
+            <div class="panel-heading">
+              <p class="eyebrow">Load output</p>
+              <h2>Voltage window</h2>
+            </div>
+            <div class="field-grid">
+              <label class="field">
+                <span>Load Vmin</span>
+                <input data-input="loadVmin" type="number" min="0" step="0.1" value="3">
+                <small>V</small>
+              </label>
+              <label class="field">
+                <span>Load Vmax</span>
+                <input data-input="loadVmax" type="number" min="0" step="0.1" value="5">
+                <small>V</small>
+              </label>
+            </div>
+            <label class="switch-row">
+              <span>
+                <strong>Use DC-DC converter after energy source</strong>
+                <small>Allows regulated output and lower storage discharge voltage.</small>
+              </span>
+              <input id="converter-enabled" type="checkbox">
+            </label>
+          </div>
+        </section>
+
+        <section class="selection-column" aria-label="YAML selections">
+          <div class="section-title">
+            <p class="eyebrow">YAML data</p>
+            <h2>Select hardware</h2>
+            <p id="data-status">Loading YAML files...</p>
+          </div>
+
+          <div class="selector-group">
+            <div class="selector-head">
+              <h3>Harvesters</h3>
+              <a href="data/harvesters.yml">harvesters.yml</a>
+            </div>
+            <div id="harvester-options" class="option-grid"></div>
+          </div>
+
+          <div class="selector-group">
+            <div class="selector-head">
+              <h3>Energy sources</h3>
+              <a href="data/energy_sources.yml">energy_sources.yml</a>
+            </div>
+            <div id="energy-source-options" class="option-grid"></div>
+          </div>
+
+          <div class="selector-group" id="converter-selector">
+            <div class="selector-head">
+              <h3>DC-DC converters</h3>
+              <a href="data/converters.yml">converters.yml</a>
+            </div>
+            <div id="converter-options" class="option-grid"></div>
+          </div>
+        </section>
+
+        <aside class="results-column" aria-label="Results">
+          <div class="result-summary" id="result-summary">
+            <p class="eyebrow">Result</p>
+            <h2 id="overall-status">Loading</h2>
+            <p id="overall-message">Waiting for YAML data.</p>
+          </div>
+
+          <div class="metric-grid">
+            <div class="metric">
+              <span>Charge time</span>
+              <strong id="metric-charge-time">-</strong>
+            </div>
+            <div class="metric">
+              <span>Net charging power</span>
+              <strong id="metric-net-power">-</strong>
+            </div>
+            <div class="metric">
+              <span>Stored deliverable energy</span>
+              <strong id="metric-stored-energy">-</strong>
+            </div>
+            <div class="metric">
+              <span>Required storage size</span>
+              <strong id="metric-required-storage">-</strong>
+            </div>
+          </div>
+
+          <div class="result-block">
+            <h3>Computed values</h3>
+            <dl id="computed-values" class="value-list"></dl>
+          </div>
+
+          <div class="result-block">
+            <h3>Checks</h3>
+            <ul id="checks-list" class="checks-list"></ul>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

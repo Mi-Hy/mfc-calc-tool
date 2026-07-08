@@ -1,0 +1,40 @@
+# Harvester definitions for the static MFC setup tool.
+# Efficiency is a fraction from 0 to 1. Power values are mW.
+# Replace example values with measured data or datasheet values for your hardware.
+# Set datasheet_url to the vendor datasheet or product page when known.
+
+- id: workbook-baseline
+  name: Workbook baseline harvester
+  summary: Matches the default values in mfc_charge_time_calculator.xlsx.
+  efficiency: 0.70
+  quiescent_power_mw: 0.005
+  input_min_v: 0.05
+  input_max_v: 4.5
+  input_current_max_ma: 110
+  storage_voltage_max_v: 4.5
+  datasheet_url: ""
+  notes: Excel default reference.
+
+- id: low-startup-demo
+  name: Low-startup demo harvester
+  summary: Example for weak MFC arrays with lower input voltage.
+  efficiency: 0.55
+  quiescent_power_mw: 0.002
+  input_min_v: 0.02
+  input_max_v: 3.3
+  input_current_max_ma: 25
+  storage_voltage_max_v: 3.8
+  datasheet_url: ""
+  notes: Replace with measured harvester data.
+
+- id: high-efficiency-lab
+  name: High-efficiency lab harvester
+  summary: Example for a tuned lab setup with better conversion efficiency.
+  efficiency: 0.82
+  quiescent_power_mw: 0.010
+  input_min_v: 0.30
+  input_max_v: 5.0
+  input_current_max_ma: 150
+  storage_voltage_max_v: 5.0
+  datasheet_url: ""
+  notes: Replace with measured harvester data.
