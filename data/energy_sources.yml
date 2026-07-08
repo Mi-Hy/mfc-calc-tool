@@ -239,41 +239,67 @@
   datasheet_url: "https://ds.tecategroup.com/data_sheet.php?i=TPLCE-3R8/1400MR18X60"
   notes: TPLCE enhanced energy density series.
 
-# - id: workbook-reference-40f
-#   name: 40 F reference energy source
-#   type: supercap
-#   technology: EDLC
-#   summary: Covers the workbook default target plus the default safety margin.
-#   capacitance_f: 40
-#   voltage_max_v: 4.2
-#   voltage_min_v: 0
-#   leakage_current_ua: 5
-#   esr_ohm: 0.10
-#   datasheet_url: ""
-#   notes: Excel-style reference storage element.
+- id: wcap-stsc-3f
+  name: Würth Elektronik WCAP-STSC 850617030001
+  type: supercap
+  technology: EDLC
+  summary: 3 F 2.7 V electric double-layer capacitor.
+  capacitance_f: 3
+  voltage_max_v: 2.7
+  voltage_min_v: 0
+  leakage_current_ua: 8
+  esr_ohm: 0.070
+  datasheet_url: "https://www.we-online.com/en/components/products/WCAP-STSC"
+  notes: Standard cylindrical THT EDLC. ESR DC value.
 
-# - id: starter-10f
-#   name: 10 F starter energy source
-#   type: supercap
-#   technology: EDLC
-#   summary: Smaller buffer for short duty cycles or reduced energy targets.
-#   capacitance_f: 10
-#   voltage_max_v: 5.5
-#   voltage_min_v: 0
-#   leakage_current_ua: 8
-#   esr_ohm: 0.18
-#   datasheet_url: ""
-#   notes: Example value, replace with datasheet or measured leakage.
+- id: wcap-stsc-7f
+  name: Würth Elektronik WCAP-STSC 850617030001
+  type: supercap
+  technology: EDLC
+  summary: 7 F 2.7 V electric double-layer capacitor.
+  capacitance_f: 7
+  voltage_max_v: 2.7
+  voltage_min_v: 0
+  leakage_current_ua: 20
+  esr_ohm: 0.045
+  datasheet_url: "https://www.we-online.com/en/components/products/WCAP-STSC"
+  notes: Standard cylindrical THT EDLC. ESR DC value.
 
-# - id: reserve-50f
-#   name: 50 F reserve energy source
-#   type: supercap
-#   technology: EDLC
-#   summary: Larger buffer for slow charging or higher energy payloads.
-#   capacitance_f: 50
-#   voltage_max_v: 5.0
-#   voltage_min_v: 0
-#   leakage_current_ua: 12
-#   esr_ohm: 0.08
-#   datasheet_url: ""
-#   notes: Example value, replace with datasheet or measured leakage.
+- id: wcap-stsc-10f
+  name: Würth Elektronik WCAP-STSC 850617021004
+  type: supercap
+  technology: EDLC
+  summary: 10 F 2.7 V electric double-layer capacitor.
+  capacitance_f: 10
+  voltage_max_v: 2.7
+  voltage_min_v: 0
+  leakage_current_ua: 30
+  esr_ohm: 0.035
+  datasheet_url: "https://www.we-online.com/en/components/products/WCAP-STSC"
+  notes: Standard cylindrical THT EDLC. ESR DC value.
+
+- id: wcap-stsc-15f
+  name: Würth Elektronik WCAP-STSC 850617021005
+  type: supercap
+  technology: EDLC
+  summary: 15 F 2.7 V electric double-layer capacitor.
+  capacitance_f: 15
+  voltage_max_v: 2.7
+  voltage_min_v: 0
+  leakage_current_ua: 60
+  esr_ohm: 0.033
+  datasheet_url: "https://www.we-online.com/en/components/products/WCAP-STSC"
+  notes: Standard cylindrical THT EDLC. ESR DC value.
+
+- id: wcap-stsc-50f
+  name: Würth Elektronik WCAP-STSC 850617021005
+  type: supercap
+  technology: EDLC
+  summary: 50 F 2.7 V electric double-layer capacitor.
+  capacitance_f: 50
+  voltage_max_v: 2.7
+  voltage_min_v: 0
+  leakage_current_ua: 105
+  esr_ohm: 0.020
+  datasheet_url: "https://www.we-online.com/en/components/products/WCAP-STSC"
+  notes: Standard cylindrical THT EDLC. ESR DC value.
