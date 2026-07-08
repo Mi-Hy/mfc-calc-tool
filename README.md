@@ -14,12 +14,13 @@ Then open <http://localhost:8080/>.
 
 ## Deploy on GitHub Pages
 
-This repository is a static site. The included GitHub Actions workflow publishes `index.html`, `app.js`, `styles.css`, `data/*.yml`, and the workbook to GitHub Pages.
+This repository is a static site and can be published directly from the repository root.
 
-1. Push the repository to GitHub on `main` or `master`.
+1. Push the repository to GitHub on `main`.
 2. In the repository settings, open **Pages**.
-3. Set **Build and deployment** source to **GitHub Actions**.
-4. Run the `Deploy GitHub Pages` workflow or push a commit.
+3. Set **Build and deployment** source to **Deploy from a branch**.
+4. Select the `main` branch and the `/ (root)` folder.
+5. Save the settings.
 
 The app uses relative paths, so it works both on a user page and a project page URL.
 
