@@ -104,6 +104,8 @@ const DATA_PATHS = {
   converters: "data/converters.yml"
 };
 
+const EMPTY_TECHNOLOGY_FILTER = "__empty_technology__";
+
 const state = {
   harvesters: [],
   energySources: [],
@@ -111,7 +113,7 @@ const state = {
   selectedHarvesterId: "",
   selectedEnergySourceId: "",
   selectedConverterId: "",
-  energySourceFilter: "",
+  energyTechnologyFilter: "",
   converterEnabled: false,
   usedFallback: false,
   inputs: {
@@ -346,28 +348,31 @@ function renderCards(container, items, selectedId, kind) {
   }).join("");
 }
 
-function filterText(item) {
-  return [
-    item.name,
-    item.type,
-    item.technology,
-    item.summary,
-    item.notes,
-    item.capacitance_f,
-    item.voltage_min_v,
-    item.voltage_max_v,
-    item.leakage_current_ua,
-    item.esr_ohm
-  ].map((value) => String(value ?? "").toLowerCase()).join(" ");
+function filteredEnergySources() {
+  if (!state.energyTechnologyFilter) return state.energySources;
+  return state.energySources.filter((item) => {
+    const technology = String(item.technology ?? "").trim();
+    if (state.energyTechnologyFilter === EMPTY_TECHNOLOGY_FILTER) return !technology;
+    return technology === state.energyTechnologyFilter;
+  });
 }
 
-function filteredEnergySources() {
-  const terms = state.energySourceFilter.trim().toLowerCase().split(/\s+/).filter(Boolean);
-  if (!terms.length) return state.energySources;
-  return state.energySources.filter((item) => {
-    const searchable = filterText(item);
-    return terms.every((term) => searchable.includes(term));
+function renderEnergyTechnologyFilter() {
+  const technologyOptions = new Map();
+  state.energySources.forEach((item) => {
+    const technology = String(item.technology ?? "").trim();
+    technologyOptions.set(technology || EMPTY_TECHNOLOGY_FILTER, technology || "Unspecified");
   });
+
+  const options = [
+    ["", "All technologies"],
+    ...Array.from(technologyOptions.entries()).sort((a, b) => a[1].localeCompare(b[1]))
+  ];
+
+  els.energyBufferFilter.innerHTML = options.map(([value, label]) => `
+    <option value="${escapeHtml(value)}">${escapeHtml(label)}</option>
+  `).join("");
+  els.energyBufferFilter.value = state.energyTechnologyFilter;
 }
 
 function readInputsFromDom() {
@@ -598,12 +603,15 @@ function renderResults() {
 }
 
 function renderSelections() {
+  if (state.energyTechnologyFilter && !filteredEnergySources().length) {
+    state.energyTechnologyFilter = "";
+  }
   const visibleEnergySources = filteredEnergySources();
   renderCards(els.harvesterOptions, state.harvesters, state.selectedHarvesterId, "harvester");
   renderCards(els.energySourceOptions, visibleEnergySources, state.selectedEnergySourceId, "energy-source");
   renderCards(els.converterOptions, state.converters, state.selectedConverterId, "converter");
-  els.energyBufferFilter.value = state.energySourceFilter;
-  els.energyBufferFilterStatus.textContent = state.energySourceFilter
+  renderEnergyTechnologyFilter();
+  els.energyBufferFilterStatus.textContent = state.energyTechnologyFilter
     ? `Showing ${visibleEnergySources.length} of ${state.energySources.length} energy buffers.`
     : `${state.energySources.length} energy buffers available.`;
   els.energyBufferEmpty.classList.toggle("is-hidden", visibleEnergySources.length > 0);
@@ -639,9 +647,13 @@ function bindEvents() {
     render();
   });
 
-  els.energyBufferFilter.addEventListener("input", () => {
-    state.energySourceFilter = els.energyBufferFilter.value;
-    renderSelections();
+  els.energyBufferFilter.addEventListener("change", () => {
+    state.energyTechnologyFilter = els.energyBufferFilter.value;
+    const visibleEnergySources = filteredEnergySources();
+    if (visibleEnergySources.length && !visibleEnergySources.some((item) => item.id === state.selectedEnergySourceId)) {
+      state.selectedEnergySourceId = visibleEnergySources[0].id;
+    }
+    render();
   });
 }
 
