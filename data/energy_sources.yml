@@ -303,3 +303,19 @@
   esr_ohm: 0.020
   datasheet_url: "https://www.we-online.com/en/components/products/WCAP-STSC"
   notes: Standard cylindrical THT EDLC. ESR DC value.
+
+- id: ecolto-hc186501500mah
+  name: Ecolto Energy HC186501500mAh 2.4V LTO
+  type: battery
+  technology: LTO
+  summary: 1500 mAh 2.4 V lithium titanate rechargeable battery.
+  capacity_ah: 1.5
+  voltage_max_v: 2.8
+  voltage_nominal_v: 2.4
+  voltage_min_v: 1.5
+  leakage_current_ua:
+  esr_ohm:
+  datasheet_url: "https://drive.google.com/file/d/1DN_rwQe7bwbHh8kNncelBHR4YOeTzeq1/view?pli=1"
+  notes: >
+    18650-format lithium titanate rechargeable battery.
+    High cycle life and high charge/discharge capability.
