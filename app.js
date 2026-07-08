@@ -34,9 +34,9 @@ const DATA_FALLBACKS = {
   datasheet_url: ""
   notes: Replace with measured harvester data.
 `,
-  energySources: `# Example energy source data. Edit data/energy_sources.yml with measured leakage values.
+  energySources: `# Example energy buffer data. Edit data/energy_sources.yml with measured leakage values.
 - id: workbook-reference-40f
-  name: 40 F reference energy source
+  name: 40 F reference energy buffer
   type: supercap
   technology: EDLC
   summary: Covers the workbook default target plus the default safety margin.
@@ -48,7 +48,7 @@ const DATA_FALLBACKS = {
   datasheet_url: ""
   notes: Excel-style reference storage element.
 - id: starter-10f
-  name: 10 F starter energy source
+  name: 10 F starter energy buffer
   type: supercap
   technology: EDLC
   summary: Smaller buffer for short duty cycles or reduced energy targets.
@@ -60,7 +60,7 @@ const DATA_FALLBACKS = {
   datasheet_url: ""
   notes: Example value, replace with datasheet or measured leakage.
 - id: reserve-50f
-  name: 50 F reserve energy source
+  name: 50 F reserve energy buffer
   type: supercap
   technology: EDLC
   summary: Larger buffer for slow charging or higher energy payloads.
@@ -72,7 +72,7 @@ const DATA_FALLBACKS = {
   datasheet_url: ""
   notes: Example value, replace with datasheet or measured leakage.
 `,
-  converters: `# Optional DC-DC converter data for the stage after the energy source.
+  converters: `# Optional DC-DC converter data for the stage after the energy buffer.
 - id: regulated-3v3-efficient
   name: Regulated 3.3 V efficient converter
   summary: Example buck-boost stage for 3.3 V electronics.
@@ -111,6 +111,7 @@ const state = {
   selectedHarvesterId: "",
   selectedEnergySourceId: "",
   selectedConverterId: "",
+  energySourceFilter: "",
   converterEnabled: false,
   usedFallback: false,
   inputs: {
@@ -136,6 +137,9 @@ const els = {
   dataStatus: document.getElementById("data-status"),
   harvesterOptions: document.getElementById("harvester-options"),
   energySourceOptions: document.getElementById("energy-source-options"),
+  energyBufferFilter: document.getElementById("energy-buffer-filter"),
+  energyBufferFilterStatus: document.getElementById("energy-buffer-filter-status"),
+  energyBufferEmpty: document.getElementById("energy-buffer-empty"),
   converterOptions: document.getElementById("converter-options"),
   converterSelector: document.getElementById("converter-selector"),
   converterEnabled: document.getElementById("converter-enabled"),
@@ -342,6 +346,30 @@ function renderCards(container, items, selectedId, kind) {
   }).join("");
 }
 
+function filterText(item) {
+  return [
+    item.name,
+    item.type,
+    item.technology,
+    item.summary,
+    item.notes,
+    item.capacitance_f,
+    item.voltage_min_v,
+    item.voltage_max_v,
+    item.leakage_current_ua,
+    item.esr_ohm
+  ].map((value) => String(value ?? "").toLowerCase()).join(" ");
+}
+
+function filteredEnergySources() {
+  const terms = state.energySourceFilter.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  if (!terms.length) return state.energySources;
+  return state.energySources.filter((item) => {
+    const searchable = filterText(item);
+    return terms.every((term) => searchable.includes(term));
+  });
+}
+
 function readInputsFromDom() {
   document.querySelectorAll("[data-input]").forEach((input) => {
     state.inputs[input.dataset.input] = Number(input.value);
@@ -445,7 +473,7 @@ function calculate() {
     },
     {
       ok: capVmaxRated <= hStorageMaxV,
-      text: `Energy source Vmax ${fmtUnit(capVmaxRated, "V")} is compatible with harvester storage limit ${fmtUnit(hStorageMaxV, "V")}.`
+      text: `Energy buffer Vmax ${fmtUnit(capVmaxRated, "V")} is compatible with harvester storage limit ${fmtUnit(hStorageMaxV, "V")}.`
     },
     {
       ok: voltageWindowValid,
@@ -453,7 +481,7 @@ function calculate() {
     },
     {
       ok: capSufficient,
-      text: `Selected energy source can deliver ${fmtUnit(capDeliverableEnergyJ, "J")} versus target plus margin ${fmtUnit(targetWithMarginLoadJ, "J")}.`
+      text: `Selected energy buffer can deliver ${fmtUnit(capDeliverableEnergyJ, "J")} versus target plus margin ${fmtUnit(targetWithMarginLoadJ, "J")}.`
     },
     {
       ok: netChargeMw > 0,
@@ -546,7 +574,7 @@ function renderResults() {
   const statusClass = result.allCriticalOk ? "is-ok" : result.netChargeMw > 0 ? "is-warn" : "is-bad";
   const status = result.allCriticalOk ? "Sufficient" : "Not sufficient";
   const message = result.allCriticalOk
-    ? `The selected ${result.energySource.name} and ${result.harvester.name} meet the energy, voltage, and time checks.`
+    ? `The selected energy buffer ${result.energySource.name} and harvester ${result.harvester.name} meet the energy, voltage, and time checks.`
     : "At least one capacity, timing, voltage, current, or count check fails for this setup.";
 
   els.resultSummary.className = `result-summary ${statusClass}`;
@@ -559,7 +587,7 @@ function renderResults() {
 
   els.flowArray.textContent = `${result.configuredMfcCount} cells, ${fmtUnit(result.arrayPowerMw, "mW")}`;
   els.flowHarvester.textContent = result.harvester.name || "No harvester";
-  els.flowEnergySource.textContent = result.energySource.name || "No energy source";
+  els.flowEnergySource.textContent = result.energySource.name || "No energy buffer";
   els.flowConverter.textContent = result.converterOn ? `${result.converter.name}, ${fmtUnit(finiteOr(result.converter.output_voltage_v), "V")}` : "Bypassed";
   els.flowLoad.textContent = `${fmtUnit(numberValue("targetEnergyJ"), "J")} in ${fmtUnit(numberValue("desiredChargeTimeH"), "h")}`;
   els.flowDcStep.classList.toggle("is-muted", !result.converterOn);
@@ -570,9 +598,15 @@ function renderResults() {
 }
 
 function renderSelections() {
+  const visibleEnergySources = filteredEnergySources();
   renderCards(els.harvesterOptions, state.harvesters, state.selectedHarvesterId, "harvester");
-  renderCards(els.energySourceOptions, state.energySources, state.selectedEnergySourceId, "energy-source");
+  renderCards(els.energySourceOptions, visibleEnergySources, state.selectedEnergySourceId, "energy-source");
   renderCards(els.converterOptions, state.converters, state.selectedConverterId, "converter");
+  els.energyBufferFilter.value = state.energySourceFilter;
+  els.energyBufferFilterStatus.textContent = state.energySourceFilter
+    ? `Showing ${visibleEnergySources.length} of ${state.energySources.length} energy buffers.`
+    : `${state.energySources.length} energy buffers available.`;
+  els.energyBufferEmpty.classList.toggle("is-hidden", visibleEnergySources.length > 0);
   els.converterSelector.classList.toggle("is-hidden", !state.converterEnabled);
   els.converterEnabled.checked = state.converterEnabled;
 }
@@ -603,6 +637,11 @@ function bindEvents() {
   els.converterEnabled.addEventListener("change", () => {
     state.converterEnabled = els.converterEnabled.checked;
     render();
+  });
+
+  els.energyBufferFilter.addEventListener("input", () => {
+    state.energySourceFilter = els.energyBufferFilter.value;
+    renderSelections();
   });
 }
 

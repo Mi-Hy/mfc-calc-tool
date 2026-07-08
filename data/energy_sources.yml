@@ -1,4 +1,4 @@
-# Energy source definitions for the static MFC setup tool.
+# Energy buffer definitions for the static MFC setup tool.
 # Type can be supercap, cap, battery, or another project-specific storage type.
 # Technology can capture chemistry or construction, for example EDLC, Li-ion, LiFePO4, ceramic.
 # Leakage is entered as current in uA and converted to mW at the selected usable Vmax.
@@ -6,7 +6,7 @@
 # Set datasheet_url to the vendor datasheet or product page when known.
 
 - id: workbook-reference-40f
-  name: 40 F reference energy source
+  name: 40 F reference energy buffer
   type: supercap
   technology: EDLC
   summary: Covers the workbook default target plus the default safety margin.
@@ -19,7 +19,7 @@
   notes: Excel-style reference storage element.
 
 - id: starter-10f
-  name: 10 F starter energy source
+  name: 10 F starter energy buffer
   type: supercap
   technology: EDLC
   summary: Smaller buffer for short duty cycles or reduced energy targets.
@@ -32,7 +32,7 @@
   notes: Example value, replace with datasheet or measured leakage.
 
 - id: reserve-50f
-  name: 50 F reserve energy source
+  name: 50 F reserve energy buffer
   type: supercap
   technology: EDLC
   summary: Larger buffer for slow charging or higher energy payloads.

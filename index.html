@@ -17,7 +17,7 @@
           <p class="eyebrow">Microbial fuel cell setup planner</p>
           <h1>MFC charge-time calculator</h1>
           <p>
-            Select a harvester and energy source from YAML data, configure the MFC array, and check whether the setup can store the requested energy within the target time.
+            Select a harvester and energy buffer from YAML data, configure the MFC array, and check whether the setup can store the requested energy within the target time.
           </p>
         </div>
       </div>
@@ -39,7 +39,7 @@
         <div class="flow-link"></div>
         <div class="flow-step">
           <span class="flow-index">03</span>
-          <strong>Energy source</strong>
+          <strong>Energy buffer</strong>
           <span id="flow-energy-source">Loading</span>
         </div>
         <div class="flow-link dc-link" id="flow-dc-link"></div>
@@ -160,7 +160,7 @@
             </div>
             <label class="switch-row">
               <span>
-                <strong>Use DC-DC converter after energy source</strong>
+                <strong>Use DC-DC converter after energy buffer</strong>
                 <small>Allows regulated output and lower storage discharge voltage.</small>
               </span>
               <input id="converter-enabled" type="checkbox">
@@ -185,10 +185,16 @@
 
           <div class="selector-group">
             <div class="selector-head">
-              <h3>Energy sources</h3>
+              <h3>Energy buffers</h3>
               <a href="data/energy_sources.yml">energy_sources.yml</a>
             </div>
+            <label class="filter-field">
+              <span>Filter energy buffers</span>
+              <input id="energy-buffer-filter" type="search" placeholder="Name, type, technology, voltage">
+            </label>
+            <p id="energy-buffer-filter-status" class="filter-status" aria-live="polite"></p>
             <div id="energy-source-options" class="option-grid"></div>
+            <p id="energy-buffer-empty" class="empty-state is-hidden">No energy buffers match this filter.</p>
           </div>
 
           <div class="selector-group" id="converter-selector">

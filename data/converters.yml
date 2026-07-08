@@ -1,4 +1,4 @@
-# Optional DC-DC converters placed after the energy source.
+# Optional DC-DC converters placed after the energy buffer.
 # Disable the converter in the UI to use direct storage voltage at the load.
 # Set datasheet_url to the vendor datasheet or product page when known.
 

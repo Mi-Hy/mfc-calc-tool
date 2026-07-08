@@ -317,6 +317,47 @@ h1 {
   font-weight: 750;
 }
 
+.filter-field {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.filter-field span,
+.filter-status,
+.empty-state {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.filter-field span {
+  text-transform: uppercase;
+}
+
+.filter-field input {
+  width: 100%;
+  min-width: 0;
+  height: 42px;
+  padding: 8px 10px;
+  border: 2px solid var(--line);
+  border-radius: 0;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 750;
+}
+
+.filter-status,
+.empty-state {
+  margin: -4px 0 12px;
+  line-height: 1.3;
+}
+
+.empty-state {
+  margin: 10px 0 0;
+}
+
 .option-grid {
   display: grid;
   gap: 10px;
